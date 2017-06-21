@@ -31,14 +31,14 @@ public class AppResource {
 		JsonArrayBuilder jab = Json.createArrayBuilder();
 
 		for (Persoon p : service.getAllPersonen()) {//per persoon
-			Format formatter = new SimpleDateFormat("yyyy-MM-dd");//datum omzetten
+			//Format formatter = new SimpleDateFormat("yyyy-MM-dd");//datum omzetten
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("id", p.getId());
 			job.add("adres", p.getAdres());
 			job.add("woonplaats", p.getWoonplaats());
 			job.add("telefoonnummer", p.getTelefoonnummer());
 			job.add("bijzonderheden", p.getBijzonderheden());
-			job.add("geboortedatum", formatter.format(p.getGeboortedatum()));//datum omzetten
+			job.add("geboortedatum", p.getGeboorteDatum());//formatter.format(p.getGeboortedatum()));//datum omzetten
 			job.add("email", p.getEmail());
 			job.add("huisarts", p.getHuisarts());
 			job.add("naam", p.getNaam());
@@ -57,7 +57,7 @@ public class AppResource {
 	@Produces("application/json")
 	public String getPersoonById(@PathParam("id") int id) {//specifiek iemand opzoeken
 		Persoon p = service.getPersoonById(id);
-		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+		//Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("id", p.getId());
@@ -65,7 +65,7 @@ public class AppResource {
 		job.add("woonplaats", p.getWoonplaats());
 		job.add("telefoonnummer", p.getTelefoonnummer());
 		job.add("bijzonderheden", p.getBijzonderheden());
-		job.add("geboortedatum", formatter.format(p.getGeboortedatum()));
+		job.add("geboortedatum", p.getGeboorteDatum());//formatter.format(p.getGeboortedatum()));
 		job.add("email", p.getEmail());
 		job.add("huisarts", p.getHuisarts());
 		job.add("naam", p.getNaam());
@@ -81,7 +81,7 @@ public class AppResource {
 	//Alle informatie uit de request van de client halen met @FormParam()
 	public String createPersoon(@FormParam("adres") String adres, @FormParam("postcode") String postcode,
 			@FormParam("woonplaats") String woonplaats, @FormParam("telefoonnummer") String telefoonnummer,
-			@FormParam("bijzonderheden") String bijzonderheden, @FormParam("geboortedatum") Date geboortedatum,
+			@FormParam("bijzonderheden") String bijzonderheden, @FormParam("geboortedatum") String geboortedatum,
 			@FormParam("email") String email, @FormParam("huisarts") String huisarts,
 			@FormParam("naam") String naam, @FormParam("betaaltermijn") String betaaltermijn) {
 		int id = service.getAllPersonen().size() + 1;//id ophogen met 1
@@ -99,7 +99,7 @@ public class AppResource {
 		job.add("woonplaats", p.getWoonplaats());
 		job.add("telefoonnummer", p.getTelefoonnummer());
 		job.add("bijzonderheden", p.getBijzonderheden());
-		job.add("geboortedatum", (JsonValue) p.getGeboortedatum());
+		job.add("geboortedatum", p.getGeboortedatum());
 		job.add("email", p.getEmail());
 		job.add("huisarts", p.getHuisarts());
 		job.add("naam", p.getNaam());
