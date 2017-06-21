@@ -27,18 +27,18 @@ public class AppResource {
 
 	@GET
 	@Produces("application/json")
-	public String getPersonen() {
+	public String getPersonen() {//De gegevens vanuit service.getAllPersonen doorsturen naar de front-end in json formaat
 		JsonArrayBuilder jab = Json.createArrayBuilder();
 
-		for (Persoon p : service.getAllPersonen()) {
-			Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+		for (Persoon p : service.getAllPersonen()) {//per persoon
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd");//datum omzetten
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("id", p.getId());
 			job.add("adres", p.getAdres());
 			job.add("woonplaats", p.getWoonplaats());
 			job.add("telefoonnummer", p.getTelefoonnummer());
 			job.add("bijzonderheden", p.getBijzonderheden());
-			job.add("geboortedatum", formatter.format(p.getGeboortedatum()));
+			job.add("geboortedatum", formatter.format(p.getGeboortedatum()));//datum omzetten
 			job.add("email", p.getEmail());
 			job.add("huisarts", p.getHuisarts());
 			job.add("naam", p.getNaam());
@@ -49,13 +49,13 @@ public class AppResource {
 		}
 
 		JsonArray array = jab.build();
-		return array.toString();
+		return array.toString();//gehele json als string doorsturen
 	}
 
 	@GET
 	@Path("{code}")
 	@Produces("application/json")
-	public String getPersoonById(@PathParam("id") int id) {
+	public String getPersoonById(@PathParam("id") int id) {//specifiek iemand opzoeken
 		Persoon p = service.getPersoonById(id);
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -78,20 +78,21 @@ public class AppResource {
 	@POST
 	@Path("/toevoegen")
 	@Produces("application/json")
+	//Alle informatie uit de request van de client halen met @FormParam()
 	public String createPersoon(@FormParam("adres") String adres, @FormParam("postcode") String postcode,
 			@FormParam("woonplaats") String woonplaats, @FormParam("telefoonnummer") String telefoonnummer,
 			@FormParam("bijzonderheden") String bijzonderheden, @FormParam("geboortedatum") Date geboortedatum,
 			@FormParam("email") String email, @FormParam("huisarts") String huisarts,
 			@FormParam("naam") String naam, @FormParam("betaaltermijn") String betaaltermijn) {
-		int id = service.getAllPersonen().size() + 1;
-		String groep = null;
+		int id = service.getAllPersonen().size() + 1;//id ophogen met 1
+		String groep = null;//bij een inschrijving heeft een persoon nog niet gelijk een rol en groep
 		String rol = null;
 		Persoon newP = new Persoon(id, adres, woonplaats, Integer.parseInt(telefoonnummer), bijzonderheden, geboortedatum, email, huisarts, naam, groep, rol);
-		service.addPersoon(newP);
-		return persoonToJson(newP).build().toString();
+		service.addPersoon(newP);//toevoegen aan de service
+		return persoonToJson(newP).build().toString();//doorsturen als String
 	}
 
-	private JsonObjectBuilder persoonToJson(Persoon p) {
+	private JsonObjectBuilder persoonToJson(Persoon p) {//gegevens van een Persoon omzetten naar json formaat
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("id", p.getId());
 		job.add("adres", p.getAdres());
@@ -109,7 +110,7 @@ public class AppResource {
 
 	@DELETE
 	@Path("/delete/{code}")
-	public Response deletePersoon(@PathParam("id") int id) {
+	public Response deletePersoon(@PathParam("id") int id) {//op basis van id de persoon verwijderen
 		Persoon found = null;
 		AppService service = ServiceProvider.getAppService();
 		for (Persoon p : service.getAllPersonen()) {
@@ -118,10 +119,10 @@ public class AppResource {
 				break;
 			}
 		}
-		if (found == null) {
+		if (found == null) {//als de persoon niet gevonden is laat dat dan weten
 			return Response.status(Response.Status.NOT_FOUND).build();
 		} else {
-			service.deletePersoon(found);
+			service.deletePersoon(found);//persoon daadwerkelijk verwijderen
 			return Response.ok().build();
 		}
 	}
