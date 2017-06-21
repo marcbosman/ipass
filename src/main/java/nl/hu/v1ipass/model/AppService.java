@@ -8,7 +8,7 @@ public class AppService {
 	private PersoonDAO persoonDAO = new PersoonDAO();
 
 	public List<Persoon> getAllPersonen() {
-		return persoonDAO.findAll();
+		return persoonDAO.findAll();//alle personen ophalen uit de database!
 	}
 
 	public boolean addPersoon(Persoon p) {
@@ -33,12 +33,12 @@ public class AppService {
 			result = true;
 		}
 		return result;
-	}*/
+	}niet af*/
 
 	public Persoon getPersoonById(int id) {
 		Persoon result = null;
 
-		for (Persoon c : getAllPersonen()) {
+		for (Persoon c : getAllPersonen()) {//loopen door alle personen en kijken naar id
 			if (c.getId() == id) {
 				result = c;
 				break;
