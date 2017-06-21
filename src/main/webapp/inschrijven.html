@@ -48,12 +48,13 @@
 	<script>
 		function initPage() {
 			loadPersonen();
+			//laden van de personen die al in de database staan om te testen
 		}
 
 		function loadPersonen() {
 			$.getJSON("restservices/personen", function(data) {
 				$.each(data, function(i, k) {
-					$('#personen').append(
+					$('#personen').append(//gegevens toevoegen aan de pagina
 							"<tr><td>" + k.id + "</td><td>" + k.adres
 									+ "</td><td>" + k.woonplaats + "</td><td>"
 									+ k.telefoonnummer + "</td><td>"
@@ -66,10 +67,10 @@
 			});
 		}
 		
-		$("#versturen").click(
+		$("#versturen").click(//een click event zetten op de button met id=versturen
 				function(response) {
-					var data = $("#inschrijven").serialize();
-					$.post("restservices/personen/toevoegen", data, function(
+					var data = $("#inschrijven").serialize();//informatie ophalen
+					$.post("restservices/personen/toevoegen", data, function(//pad voor communicatie met back-end
 							response) {
 						$("#response").text(JSON.stringify(response));
 					});
