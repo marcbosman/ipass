@@ -6,7 +6,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-public class BaseDAO {
+public class BaseDAO {//baseDAO die goed gebruikt kan worden op heroku met postgreSQL
 	private DataSource connectionPool;
 
 	public BaseDAO() {
