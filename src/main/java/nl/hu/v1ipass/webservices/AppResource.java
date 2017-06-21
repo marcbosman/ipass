@@ -31,7 +31,7 @@ public class AppResource {
 		JsonArrayBuilder jab = Json.createArrayBuilder();
 
 		for (Persoon p : service.getAllPersonen()) {
-			Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("id", p.getId());
 			job.add("adres", p.getAdres());
@@ -57,7 +57,7 @@ public class AppResource {
 	@Produces("application/json")
 	public String getPersoonById(@PathParam("id") int id) {
 		Persoon p = service.getPersoonById(id);
-		Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("id", p.getId());
