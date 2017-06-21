@@ -38,7 +38,7 @@ public class AppResource {
 			job.add("woonplaats", p.getWoonplaats());
 			job.add("telefoonnummer", p.getTelefoonnummer());
 			job.add("bijzonderheden", p.getBijzonderheden());
-			job.add("geboortedatum", p.getGeboorteDatum());//formatter.format(p.getGeboortedatum()));//datum omzetten
+			job.add("geboortedatum", p.getGeboortedatum());//formatter.format(p.getGeboortedatum()));//datum omzetten
 			job.add("email", p.getEmail());
 			job.add("huisarts", p.getHuisarts());
 			job.add("naam", p.getNaam());
@@ -65,7 +65,7 @@ public class AppResource {
 		job.add("woonplaats", p.getWoonplaats());
 		job.add("telefoonnummer", p.getTelefoonnummer());
 		job.add("bijzonderheden", p.getBijzonderheden());
-		job.add("geboortedatum", p.getGeboorteDatum());//formatter.format(p.getGeboortedatum()));
+		job.add("geboortedatum", p.getGeboortedatum());//formatter.format(p.getGeboortedatum()));
 		job.add("email", p.getEmail());
 		job.add("huisarts", p.getHuisarts());
 		job.add("naam", p.getNaam());
