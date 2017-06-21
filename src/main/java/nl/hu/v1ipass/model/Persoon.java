@@ -8,7 +8,7 @@ public class Persoon {
 	private String woonplaats;
 	private int telefoonnummer;
 	private String bijzonderheden;
-	private Date geboortedatum;
+	private String geboortedatum;
 	private String email;
 	private String huisarts;
 	private String naam;
@@ -16,7 +16,7 @@ public class Persoon {
 	private String rol;
 	
 	
-	public Persoon(int id, String adres, String woonplaats, int telefoonnummer, String bijzonderheden, Date geboortedatum, String email, String huisarts, String naam, String groep, String rol) {
+	public Persoon(int id, String adres, String woonplaats, int telefoonnummer, String bijzonderheden, String geboortedatum, String email, String huisarts, String naam, String groep, String rol) {
 		this.id = id;
 		this.adres = adres;
 		this.woonplaats = woonplaats;
@@ -81,12 +81,12 @@ public class Persoon {
 	}
 
 
-	public Date getGeboortedatum() {
+	public String getGeboortedatum() {
 		return geboortedatum;
 	}
 
 
-	public void setGeboortedatum(Date geboortedatum) {
+	public void setGeboortedatum(String geboortedatum) {
 		this.geboortedatum = geboortedatum;
 	}
 
