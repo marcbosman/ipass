@@ -85,8 +85,8 @@ public class AppResource {
 			@FormParam("email") String email, @FormParam("huisarts") String huisarts,
 			@FormParam("naam") String naam, @FormParam("betaaltermijn") String betaaltermijn) {
 		int id = service.getAllPersonen().size() + 1;//id ophogen met 1
-		String groep = null;//bij een inschrijving heeft een persoon nog niet gelijk een rol en groep
-		String rol = null;
+		String groep = "Geen";//bij een inschrijving heeft een persoon nog niet gelijk een rol en groep
+		String rol = "In afwachting";
 		Persoon newP = new Persoon(id, adres, woonplaats, Integer.parseInt(telefoonnummer), bijzonderheden, geboortedatum, email, huisarts, naam, groep, rol);
 		service.addPersoon(newP);//toevoegen aan de service
 		return persoonToJson(newP).build().toString();//doorsturen als String
