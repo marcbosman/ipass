@@ -47,10 +47,10 @@
 	
 	<script>
 		function initPage() {
-			loadCountries();
+			loadPersonen();
 		}
 
-		function loadCountries() {
+		function loadPersonen() {
 			$.getJSON("restservices/personen", function(data) {
 				$.each(data, function(i, k) {
 					$('#personen').append(
@@ -68,7 +68,7 @@
 		
 		$("#versturen").click(
 				function(response) {
-					var data = $("#toevoegenCountry").serialize();
+					var data = $("#inschrijven").serialize();
 					$.post("restservices/personen/toevoegen", data, function(
 							response) {
 						$("#response").text(JSON.stringify(response));
