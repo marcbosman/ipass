@@ -89,9 +89,7 @@ public class AppResource {
 		String rol = "In afwachting";
 		Persoon newP = new Persoon(id, adres, woonplaats, Integer.parseInt(telefoonnummer), bijzonderheden, geboortedatum, email, huisarts, naam, groep, rol);
 		service.addPersoon(newP);//toevoegen aan de service
-		String str = "Verstuurd!";
-		return str;
-		//return persoonToJson(newP).build().toString();//doorsturen als String
+		return persoonToJson(newP).build().toString();//doorsturen als String
 	}
 
 	private JsonObjectBuilder persoonToJson(Persoon p) {//gegevens van een Persoon omzetten naar json formaat
