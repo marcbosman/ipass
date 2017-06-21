@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<title>Inschrijven</title>
+</head>
+<body>
+	<h1 align="center">Inschrijven</h1>
+	<form id="inschrijven">
+		Naam:<br> <input type="text" name="naam"><br>
+		Geboortedatum:<br> <input type="date" name="geboortedatum"><br>
+		Postcode:<br> <input type="text" name="postcode"><br>
+		Adres:<br> <input type="text" name="adres"><br>
+		Woonplaats:<br> <input type="text" name="woonplaats"><br>
+		Telefoonnummer:<br> <input type="text" name="telefoonnummer"><br>
+		E-mail:<br> <input type="text" name="email"><br>
+		Huisarts:<br> <input type="text" name="huisarts"><br>
+		Bijzonderheden:<br>
+		<textarea rows="5" cols="30" id="bijzonderheden"></textarea>
+		<br> Betaaltermijn:<br> <select name="betaaltermijn">
+			<option value="maand">Per maand</option>
+			<option value="kwartaal">Per kwartaal</option>
+			<option value="halfjaar">Per halfjaar</option>
+			<option value="jaar">Per jaar</option>
+		</select><br>
+		<input type="button" value="versturen" id="versturen">
+	</form>
+	
+	<h1 align="center">Ingeschreven leden</h1>
+	<table id="personen">
+		<tr>
+			<th>id</th>
+			<th>adres</th>
+			<th>woonplaats</th>
+			<th>telefoonnummmer</th>
+			<th>bijzonderheden</th>
+			<th>geboortedatum</th>
+			<th>email</th>
+			<th>huisarts</th>
+			<th>naam</th>
+			<th>groep</th>
+			<th>rol</th>
+		</tr>
+	</table>
+	<p id="response"></p>
+	
+	<script>
+		function initPage() {
+			loadCountries();
+		}
+
+		function loadCountries() {
+			$.getJSON("restservices/personen", function(data) {
+				$.each(data, function(i, k) {
+					$('#personen').append(
+							"<tr><td>" + k.id + "</td><td>" + k.adres
+									+ "</td><td>" + k.woonplaats + "</td><td>"
+									+ k.telefoonnummer + "</td><td>"
+									+ k.bijzonderheden + "</td><td>"
+									+ k.geboortedatum + "</td><td>" + k.email
+									+ "</td><td>" + k.huisarts + "</td><td>"
+									+ k.naam + "</td><td>" + k.groep
+									+ "</td><td>" + k.rol + "</td></tr>");
+				});
+			});
+		}
+		
+		$("#versturen").click(
+				function(response) {
+					var data = $("#toevoegenCountry").serialize();
+					$.post("restservices/personen/toevoegen", data, function(
+							response) {
+						$("#response").text(JSON.stringify(response));
+					});
+				});
+
+		initPage();
+	</script>
+</body>
+</html>
