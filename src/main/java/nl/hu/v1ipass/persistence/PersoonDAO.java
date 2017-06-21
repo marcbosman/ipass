@@ -25,7 +25,7 @@ public class PersoonDAO extends BaseDAO {
 				String woonplaats = dbResultSet.getString("woonplaats");
 				int telefoonnummer = dbResultSet.getInt("telefoonnummer");
 				String bijzonderheden = dbResultSet.getString("bijzonderheden");
-				Date geboortedatum = dbResultSet.getDate("geboortedatum");
+				String geboortedatum = dbResultSet.getString("geboortedatum");
 				String email = dbResultSet.getString("email");
 				String huisarts = dbResultSet.getString("huisarts");
 				String naam = dbResultSet.getString("naam");
